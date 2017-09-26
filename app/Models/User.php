@@ -31,6 +31,6 @@ class User extends Authenticatable
     {
         $avatarEmail = md5( strtolower(trim($this->email)));
 
-        return "https://www.gravatar.com/avatar/{$avatarEmail}?size=80?default=mm";
+        return "https://www.gravatar.com/avatar/{$avatarEmail}?size=80&default=retro";
     }
 }
