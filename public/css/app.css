@@ -9186,3 +9186,7 @@ a.text-dark:hover {
   visibility: hidden !important;
 }
 
+.card-border {
+  border-top: 3px solid #2ecc71;
+}
+

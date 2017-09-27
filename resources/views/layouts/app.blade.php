@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ setting('app.name') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -16,7 +16,7 @@
 <body>
 <div id="app">
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+        <a class="navbar-brand" href="{{ url('/') }}">{{ setting('app.name') }}</a>
         @guest
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
@@ -30,6 +30,8 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="/admin/users">Users</a>
                         <a class="dropdown-item" href="/admin/roles">Roles</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/admin/settings">Settings</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                    document.getElementById('logout-form').submit();">
