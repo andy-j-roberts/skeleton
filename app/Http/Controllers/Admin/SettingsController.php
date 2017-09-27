@@ -44,6 +44,7 @@ class SettingsController extends Controller
             $setting = Setting::whereNamespaceAndKey($namespace, $key)->first();
             $setting->update(['value' => $value]);
         }
+        confirm('Settings have been updated');
 
         return redirect('/admin/settings');
     }

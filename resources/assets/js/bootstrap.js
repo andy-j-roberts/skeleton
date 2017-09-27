@@ -11,6 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
     window.Popper = require('popper.js').default;
     require('bootstrap');
+    window.Notyf = require('notyf');
 } catch (e) {}
 
 /**

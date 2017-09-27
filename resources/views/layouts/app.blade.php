@@ -56,6 +56,11 @@
             </form>
         </div>
     @endif
+
+    @if(session()->has('notifications'))
+        <notification :messages="{{ session('notifications') }}"></notification>
+    @endif
+
     <div class="my-5">
         @yield('content')
     </div>

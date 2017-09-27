@@ -18,7 +18,8 @@ window.Vue = require('vue');
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('announcements', require('./components/Announcements.vue'));
 Vue.component('announcement', require('./components/Announcement.vue'));
+Vue.component('notification', require('./components/Notification.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
 });
