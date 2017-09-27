@@ -10,7 +10,9 @@
     <div class="row">
         <div class="col-8">
             <h1 class="mb-5">Dashboard<br/><small class="text-muted">Welcome back {{ auth()->user()->name }}</small></h1>
-            <announcement></announcement>
+            @admin
+                <announcement></announcement>
+            @endadmin
         </div>
         <div class="col">
             <announcements></announcements>

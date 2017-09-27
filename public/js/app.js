@@ -51541,6 +51541,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -51584,6 +51585,12 @@ var render = function() {
         [_vm._v(_vm._s(_vm.announcements.length))]
       )
     ]),
+    _vm._v(" "),
+    _vm.announcements.length == 0
+      ? _c("div", { staticClass: "alert alert-warning" }, [
+          _vm._v("No announcements have been made.")
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "ul",

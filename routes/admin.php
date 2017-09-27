@@ -9,5 +9,5 @@ Route::group(['middleware' => ['auth','verified']], function(){
     Route::resource('users', 'UsersController');
     Route::resource('roles', 'RolesController');
     Route::resource('pages', 'PagesController');
-
+    Route::resource('announcements', 'AnnouncementsController');
 });

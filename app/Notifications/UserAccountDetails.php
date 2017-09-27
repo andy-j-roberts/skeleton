@@ -42,9 +42,10 @@ class UserAccountDetails extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Here are your account details:')
+            ->line("Username: {$notifiable->email}")
+            ->line("Password: {$this->password}")
+                    ->action('Login', url('/login'));
     }
 
     /**

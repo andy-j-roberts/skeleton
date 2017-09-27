@@ -42,14 +42,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $password = bcrypt(str_random(16));
+        $password = str_random(16);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $password,
+            'password' => bcrypt($password),
         ]);
         $user->notify(new UserAccountDetails($password));
         event(new NewUserWasCreated($user));
+        confirm('User account has been successfully created.');
 
         return redirect('/admin/users');
     }
@@ -111,6 +112,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        confirm('User account has been successfully deleted.');
 
         return redirect('/admin/users');
     }

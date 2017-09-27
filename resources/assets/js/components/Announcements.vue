@@ -2,6 +2,7 @@
     <div class="container mb-5">
         <h2>Announcements <span class="badge badge-success" v-show="announcements.length > 0">{{ announcements.length
             }}</span></h2>
+        <div class="alert alert-warning" v-if="announcements.length == 0">No announcements have been made.</div>
         <ul class="list-group">
             <li class="list-group-item announcement" v-for="announcement in announcements">
                 <div class="row align-items-center">

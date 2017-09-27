@@ -31,12 +31,14 @@
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="/admin/users">Users</a>
-                        <a class="dropdown-item" href="/admin/roles">Roles</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/admin/pages">Pages</a>
-                            <a class="dropdown-item" href="/admin/settings">Settings</a>
-                        <div class="dropdown-divider"></div>
+                        @admin
+                            <a class="dropdown-item" href="/admin/users">Users</a>
+                            <a class="dropdown-item" href="/admin/roles">Roles</a>
+                            <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/admin/pages">Pages</a>
+                                <a class="dropdown-item" href="/admin/settings">Settings</a>
+                            <div class="dropdown-divider"></div>
+                        @endadmin
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                    document.getElementById('logout-form').submit();">
                             Logout
