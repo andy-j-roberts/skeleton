@@ -9,7 +9,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ setting('app.name') }} {{ setting('app.version') }}</title>
-
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'.editor',theme: 'modern',
+            plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat' });</script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -31,6 +34,7 @@
                         <a class="dropdown-item" href="/admin/users">Users</a>
                         <a class="dropdown-item" href="/admin/roles">Roles</a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/admin/pages">Pages</a>
                             <a class="dropdown-item" href="/admin/settings">Settings</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
