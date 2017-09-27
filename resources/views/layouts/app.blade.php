@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ setting('app.name') }}</title>
+    <title>{{ setting('app.name') }} {{ setting('app.version') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -16,7 +16,7 @@
 <body>
 <div id="app">
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url('/') }}">{{ setting('app.name') }}</a>
+        <a class="navbar-brand" href="{{ url('/') }}">{{ setting('app.name') }} {{ setting('app.version') }}</a>
         @guest
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
