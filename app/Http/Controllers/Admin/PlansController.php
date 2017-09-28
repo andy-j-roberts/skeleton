@@ -5,84 +5,52 @@ namespace App\Http\Controllers\Admin;
 use App\Plan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class PlansController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $plans = Plan::all();
 
-        return view('admin.plans.index', ['plans' => $plans]);
+        return view('admin.plans.index', [
+            'monthly' => $plans->where('interval', 'month'),
+            'annual'  => $plans->where('interval', 'year'),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.plans.create', ['plan' => new Plan()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'stripe_id' => 'required',
+            'name'      => 'required',
+            'amount'    => 'required',
+            'currency'  => 'required',
+            'interval'  => 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+            $plan = Plan::create($request->only(['stripe_id', 'name', 'amount', 'currency', 'interval']));
+            $plan->syncWithStripe();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+        confirm('Plan has been created.');
+
+        return redirect('/admin/plans');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Plan $plan)
     {
-        //
+        return view('admin.plans.show', ['plan' => $plan, 'subscriptions' => $plan->getSubscriptions()]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

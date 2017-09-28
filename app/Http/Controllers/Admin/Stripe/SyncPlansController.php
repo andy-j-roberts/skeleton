@@ -17,9 +17,14 @@ class SyncPlansController extends Controller
             $plan = Plan::firstOrCreate(['stripe_id' => $stripePlan->id]);
             $plan->update([
                 'name'   => $stripePlan->name,
-                'description' => $stripePlan->metadata->description,
                 'amount' => $stripePlan->amount,
+                'interval' => $stripePlan->interval,
+                'currency' => $stripePlan->currency,
+                'metadata' => $stripePlan->metadata,
             ]);
         }
+        confirm('Plans have been updated.');
+
+        return redirect('/admin/plans');
     }
 }

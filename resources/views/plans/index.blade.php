@@ -14,8 +14,8 @@
                 <div class="card card-border">
                     <div class="card-body">
                         <h2>{{ $plan->name }}</h2>
-                        <p class="text-muted">{{ $plan->description }}</p>
-                        <h1>{{ $plan->amount }}</h1>
+                        <p class="text-muted">{{ $plan->getMetadata('description') }}</p>
+                        <h1>{{ $plan->getAmountAsCurrency() }}</h1>
                         <button class="btn btn-primary mt-5">Select Plan</button>
                     </div>
                 </div>

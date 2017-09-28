@@ -18,6 +18,7 @@ class CreatePlansTable extends Migration
             $table->string('stripe_id');
             $table->string('name')->nullable();
             $table->integer('amount')->nullable();
+            $table->text('metadata')->nullable();
             $table->timestamps();
         });
     }
