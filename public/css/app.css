@@ -9190,3 +9190,34 @@ a.text-dark:hover {
   border-top: 3px solid #2ecc71;
 }
 
+.admin-table {
+  border-top: 1px solid #ECECEC;
+  width: 100%;
+}
+
+.admin-table .controls {
+  opacity: 0;
+}
+
+.admin-table thead th {
+  background: #F7F7F7;
+  font-size: 14px;
+  font-weight: 400;
+  color: #4a4a4a;
+  text-transform: uppercase;
+  padding: 15px;
+}
+
+.admin-table tbody tr td {
+  border-top: 1px solid #e6e6e6;
+  padding: 15px;
+}
+
+.admin-table tbody tr:hover {
+  background: #F5F8FD;
+}
+
+.admin-table tbody tr:hover .controls {
+  opacity: 1;
+}
+

@@ -22,9 +22,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['demo']], function(){
-    Route::get('{permalink?}', 'PagesController');
+
 });
 
+Route::resource('plans', 'PlansController');
+Route::get('{permalink?}', 'PagesController');
 
 Route::get('email-verification/check/{token}', 'Auth\VerificationController@verifyAccount');
 Route::get('email-verification/error', 'Auth\VerificationController@getVerificationError');

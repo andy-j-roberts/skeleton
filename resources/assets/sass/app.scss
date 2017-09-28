@@ -12,3 +12,31 @@
 .card-border {
   border-top: 3px solid rgba(46, 204, 113, 1.00);
 }
+
+.admin-table {
+  border-top: 1px solid #ECECEC;
+  width: 100%;
+  .controls {
+    opacity: 0;
+  }
+  thead th {
+    background: #F7F7F7;
+    font-size: 14px;
+    font-weight: 400;
+    color: #4a4a4a;
+    text-transform: uppercase;
+    padding: 15px;
+  }
+  tbody tr td {
+    border-top: 1px solid #e6e6e6;
+    padding: 15px;
+  }
+  tbody tr {
+    &:hover {
+      background: #F5F8FD;
+      .controls {
+        opacity: 1;
+      }
+    }
+  }
+}

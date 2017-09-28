@@ -36,6 +36,7 @@
                             <a class="dropdown-item" href="/admin/roles">Roles</a>
                             <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/admin/pages">Pages</a>
+                                <a class="dropdown-item" href="/admin/plans">Plans</a>
                                 <a class="dropdown-item" href="/admin/settings">Settings</a>
                             <div class="dropdown-divider"></div>
                         @endadmin
