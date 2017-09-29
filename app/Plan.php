@@ -10,7 +10,6 @@ use Stripe\Subscription as StripeSubscription;
 class Plan extends Model
 {
     protected $guarded = [];
-    protected $appends = ['currency'];
     protected $casts = ['metadata' => 'json'];
     const CURRENCIES = ['gbp' => '£'];
 

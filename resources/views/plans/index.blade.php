@@ -1,26 +1,40 @@
 @extends('layouts.app')
-
+@section('scripts')
+    @parent
+    <script src="https://js.stripe.com/v3/"></script>
+@endsection
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col text-center my-5">
-                <h1>Choose your plan</h1>
-                <h3 class="text-muted">Try free for 30 days. No credit card required.</h3>
-            </div>
-        </div>
-        <div class="row">
-            @foreach($plans as $plan)
-            <div class="col">
-                <div class="card card-border">
-                    <div class="card-body">
-                        <h2>{{ $plan->name }}</h2>
-                        <p class="text-muted">{{ $plan->getMetadata('description') }}</p>
-                        <h1>{{ $plan->getAmountAsCurrency() }}</h1>
-                        <button class="btn btn-primary mt-5">Select Plan</button>
-                    </div>
+    <subscription-plans inline-template :plans="{{ $plans->collection }}">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center my-5">
+                    <h1>Choose your plan</h1>
+                    <h3 class="text-muted">Try free for 30 days. No credit card required.</h3>
                 </div>
             </div>
-            @endforeach
+            <ul class="nav nav-pills justify-content-center mb-3">
+                <li class="nav-item nav-link active" data-toggle="tab" href="#monthly" @click.prevent="switchInterval('month')">Monthly</li>
+                <li class="nav-item nav-link" data-toggle="tab" href="#annual" @click.prevent="switchInterval('year')">Annual</li>
+            </ul>
+            <div class="card-deck" v-if="ui.plan_selected == false">
+
+                    <div class="card card-border" v-for="plan in filtered_plans">
+                        <div class="card-body">
+                            <h2>@{{ plan.name }}</h2>
+                            <p class="text-muted">@{{ plan.description }}</p>
+                            <h1>@{{ plan.amount }}</h1>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary btn-block" @click.prevent="selectPlan(plan)">Select Plan</button>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="row" v-if="ui.plan_selected">
+                <div class="col">
+                    <subscribe></subscribe>
+                </div>
+            </div>
         </div>
-    </div>
+    </subscription-plans>
 @endsection

@@ -10,9 +10,11 @@
 
     <title>{{ setting('app.name') }} {{ setting('app.version') }}</title>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'.editor',theme: 'modern',
+    <script>tinymce.init({
+            selector: '.editor', theme: 'modern',
             plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
-            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat' });</script>
+            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
+        });</script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -28,17 +30,18 @@
                 <div class="btn-group">
                     <button class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
                             aria-expanded="false">
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                        <img src="{{ auth()->user()->avatar }}" alt="avatar" class="rounded-circle"
+                             height="24px"> {{ Auth::user()->name }} <span class="caret"></span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         @admin
-                            <a class="dropdown-item" href="/admin/users">Users</a>
-                            <a class="dropdown-item" href="/admin/roles">Roles</a>
-                            <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/admin/pages">Pages</a>
-                                <a class="dropdown-item" href="/admin/plans">Plans</a>
-                                <a class="dropdown-item" href="/admin/settings">Settings</a>
-                            <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/admin/users">Users</a>
+                        <a class="dropdown-item" href="/admin/roles">Roles</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/admin/pages">Pages</a>
+                        <a class="dropdown-item" href="/admin/plans">Plans</a>
+                        <a class="dropdown-item" href="/admin/settings">Settings</a>
+                        <div class="dropdown-divider"></div>
                         @endadmin
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                    document.getElementById('logout-form').submit();">
@@ -59,7 +62,8 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="DELETE">
                 <button class="btn-link alert-link"><i
-                            class="fa fa-user-circle-o" aria-hidden="true"></i> Return to original user</button>
+                            class="fa fa-user-circle-o" aria-hidden="true"></i> Return to original user
+                </button>
             </form>
         </div>
     @endif
@@ -75,6 +79,7 @@
 </div>
 
 <!-- Scripts -->
+@yield('scripts')
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

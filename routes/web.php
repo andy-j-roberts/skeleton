@@ -20,7 +20,11 @@ Route::get('/under-construction', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['middleware' => 'valid-subscription'], function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 Route::group(['middleware' => ['demo']], function(){
 
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\UserHasValidSubscription;
 use App\Http\Middleware\VerifiedUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -60,5 +61,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => VerifiedUser::class,
         'demo' => \Spatie\DemoMode\DemoMode::class,
+        'valid-subscription' => UserHasValidSubscription::class,
     ];
 }

@@ -20,6 +20,11 @@ Vue.component('announcements', require('./components/Announcements.vue'));
 Vue.component('announcement', require('./components/Announcement.vue'));
 Vue.component('notification', require('./components/Notification.vue'));
 
+Vue.component('subscription-plans', require('./components/SubscriptionPlans.vue'));
+Vue.component('subscribe', require('./components/Subscribe.vue'));
+
+window.bus = new Vue();
+
 const app = new Vue({
     el: '#app',
 });
