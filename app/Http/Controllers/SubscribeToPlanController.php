@@ -10,7 +10,7 @@ class SubscribeToPlanController extends Controller
     {
         $user = auth()->user();
         $user->newSubscription($request->get('stripe_id'),
-            $request->get('stripe_id'))->create($request->get('stripeToken'), [
+            $request->get('stripe_id'))->create($request->get('stripeToken')['id'], [
             'email' => $user->email,
         ]);
         confirm('You have successfully subscribed.');

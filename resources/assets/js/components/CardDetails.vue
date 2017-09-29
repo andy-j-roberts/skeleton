@@ -1,17 +1,9 @@
 <template>
-    <div class="col-6 mx-auto my-3">
-        <div class="card">
-            <div class="bg-primary text-white">
-                <div class="card-body">
-                    <h4 class="card-title">Subscribe to {{ plan.name }}</h4>
-                    <h1>{{ plan.amount }}
-                        <small style="font-size: 16px;">/ per {{ plan.interval }}</small>
-                    </h1>
-                </div>
-            </div>
-
+    <div class="col my-3">
+        <div class="card card-border">
             <div class="card-body">
-                <h2 class="mb-3">Add Payment Details</h2>
+                <h4 class="mb-3">Update Card Details</h4>
+                <p>xxxx-xxxx-xxxx-4242</p>
                 <form action="/charge" method="post" id="payment-form">
                     <div class="form-group">
                         <label for="card-element">
@@ -25,8 +17,7 @@
                         <div id="card-errors" class="text-muted" role="alert"></div>
                     </div>
                     <div class="text-right">
-                        <button class="btn btn-link btn-lg" @click.prevent="cancel">Cancel</button>
-                        <button class="btn btn-success btn-lg">Submit Payment</button>
+                        <button class="btn btn-success">Update</button>
                     </div>
                 </form>
             </div>
@@ -60,18 +51,9 @@
 </style>
 <script>
     export default {
-        props: [''],
         data() {
             return {
-                plan: []
             }
-        },
-        created() {
-            bus.$on('plan-selected', plan => {
-                console.log(plan);
-                this.plan = plan;
-
-            });
         },
         mounted() {
             var stripe = Stripe('pk_test_9BcKJTKJyjAD9cONUF4h3CEP');
@@ -114,17 +96,14 @@
                         var errorElement = document.getElementById('card-errors');
                         errorElement.textContent = result.error.message;
                     } else {
-                        this.subscribe(result.token);
+                        this.update(result.token);
                     }
                 });
             });
         },
         methods: {
-            cancel() {
-                bus.$emit('cancel-plan');
-            },
-            subscribe(token) {
-                axios.post('/subscribe', {'stripeToken': token, 'stripe_id': this.plan.stripe_id})
+            update(token) {
+                axios.put('/card-details', {'stripeToken': token})
                     .then(response => {
 
                     })

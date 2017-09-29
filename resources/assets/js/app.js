@@ -22,6 +22,9 @@ Vue.component('notification', require('./components/Notification.vue'));
 
 Vue.component('subscription-plans', require('./components/SubscriptionPlans.vue'));
 Vue.component('subscribe', require('./components/Subscribe.vue'));
+Vue.component('subscriptions', require('./components/Subscriptions.vue'));
+
+Vue.component('card-details', require('./components/CardDetails.vue'));
 
 window.bus = new Vue();
 

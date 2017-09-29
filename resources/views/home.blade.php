@@ -15,6 +15,8 @@
             @endadmin
         </div>
         <div class="col">
+            <card-details></card-details>
+            <subscriptions></subscriptions>
             <announcements></announcements>
         </div>
     </div>

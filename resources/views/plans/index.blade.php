@@ -1,8 +1,4 @@
 @extends('layouts.app')
-@section('scripts')
-    @parent
-    <script src="https://js.stripe.com/v3/"></script>
-@endsection
 @section('content')
     <subscription-plans inline-template :plans="{{ $plans->collection }}">
         <div class="container">
@@ -16,21 +12,21 @@
                 <li class="nav-item nav-link active" data-toggle="tab" href="#monthly" @click.prevent="switchInterval('month')">Monthly</li>
                 <li class="nav-item nav-link" data-toggle="tab" href="#annual" @click.prevent="switchInterval('year')">Annual</li>
             </ul>
-            <div class="card-deck" v-if="ui.plan_selected == false">
-
-                    <div class="card card-border" v-for="plan in filtered_plans">
+            <div class="row" v-if="ui.plan_selected == false">
+                <div class="col-4" v-for="plan in filtered_plans">
+                    <div class="card card-border">
                         <div class="card-body">
                             <h2>@{{ plan.name }}</h2>
                             <p class="text-muted">@{{ plan.description }}</p>
-                            <h1>@{{ plan.amount }}</h1>
+                            <h1>@{{ plan.amount }} <small style="font-size: 16px;">/ per @{{ plan.interval }}</small></h1>
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-primary btn-block" @click.prevent="selectPlan(plan)">Select Plan</button>
                         </div>
                     </div>
-
+                </div>
             </div>
-            <div class="row" v-if="ui.plan_selected">
+            <div class="row" v-show="ui.plan_selected">
                 <div class="col">
                     <subscribe></subscribe>
                 </div>

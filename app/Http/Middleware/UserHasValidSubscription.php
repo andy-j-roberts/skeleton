@@ -15,7 +15,7 @@ class UserHasValidSubscription
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && ! $request->user()->subscribed('main')) {
+        if ($request->user() && ! $request->user()->subscribed('essential')) {
             // This user is not a paying customer...
             return redirect('plans');
         }

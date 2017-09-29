@@ -30,6 +30,8 @@ Route::group(['middleware' => ['demo']], function(){
 });
 
 Route::resource('plans', 'PlansController');
+Route::post('subscribe','SubscribeToPlanController');
+Route::get('subscriptions/{name}','CancelSubscriptionController');
 Route::get('{permalink?}', 'PagesController');
 
 Route::get('email-verification/check/{token}', 'Auth\VerificationController@verifyAccount');
