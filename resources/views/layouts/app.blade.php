@@ -7,7 +7,11 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <script>
+        window.App = {
+            user: {!! auth()->user() ? 'true' : 'null' !!}
+        }
+    </script>
     <title>{{ setting('app.name') }} {{ setting('app.version') }}</title>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script>tinymce.init({

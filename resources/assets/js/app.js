@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -8,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.Vuex = require('vuex');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,6 +28,31 @@ Vue.component('card-details', require('./components/CardDetails.vue'));
 
 window.bus = new Vue();
 
+App.store = new Vuex.Store({
+    state: {
+        user: [],
+    },
+    mutations: {
+        user(state, user) {
+            state.user = user;
+        }
+    }
+})
+
 const app = new Vue({
     el: '#app',
+    mounted() {
+        if(App.user == true) {
+            this.getUser();
+        }
+    },
+    methods: {
+        getUser() {
+            axios.get('/api/user')
+                .then(response => {
+                    App.store.commit('user', response.data);
+                    bus.$emit('userRetrieved', response.data);
+                })
+        }
+    }
 });
