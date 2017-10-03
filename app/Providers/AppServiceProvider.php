@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
             return auth()->user()->hasRole('Admin');
         });
         Resource::withoutWrapping();
+        Cashier::useCurrency('gbp', '£');
     }
 
     /**

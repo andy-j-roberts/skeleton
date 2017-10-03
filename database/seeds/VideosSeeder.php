@@ -12,7 +12,7 @@ class VideosSeeder extends Seeder
     public function run()
     {
         $video = factory(\App\Video::class)->create();
-        //$product = factory(\App\Product::class)->make();
-        //$video->products()->save($product);
+        $product = factory(\App\Product::class)->make();
+        $video->products()->save($product);
     }
 }

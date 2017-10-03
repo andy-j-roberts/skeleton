@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Product;
+use App\Traits\CanAccessContent;
 use App\Traits\GeneratesUuidIdentifier;
 use App\Traits\HasRoles;
 use App\Traits\Verifiable;
@@ -18,6 +20,7 @@ class User extends Authenticatable
     use Verifiable;
     use HasApiTokens;
     use Billable;
+    use CanAccessContent;
 
     protected $guarded = [];
     protected $dates = ['last_login'];
@@ -34,5 +37,10 @@ class User extends Authenticatable
         $avatarEmail = md5( strtolower(trim($this->email)));
 
         return "https://www.gravatar.com/avatar/{$avatarEmail}?size=80&default=retro";
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'user_products','user_id','product_id')->withTimestamps();
     }
 }

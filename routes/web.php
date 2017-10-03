@@ -33,6 +33,12 @@ Route::resource('plans', 'PlansController');
 Route::post('subscribe','SubscribeToPlanController');
 Route::get('subscriptions/{name}','CancelSubscriptionController');
 Route::get('subscriptions/{name}/resume','ResumeSubscriptionController');
+
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('videos', 'VideosController@index');
+    Route::get('videos/{video_permalink}', 'VideosController@show');
+});
+
 Route::get('{permalink?}', 'PagesController');
 
 Route::get('email-verification/check/{token}', 'Auth\VerificationController@verifyAccount');

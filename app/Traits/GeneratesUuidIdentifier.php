@@ -10,6 +10,7 @@ trait GeneratesUuidIdentifier
     public static function bootGeneratesUuidIdentifier()
     {
         static::creating(function ($model) {
+            $model->incrementing = false;
             $model->attributes[$model->getKeyName()] = (string)$model->generateNewUuid();
         });
     }
@@ -17,5 +18,10 @@ trait GeneratesUuidIdentifier
     public function generateNewUuid()
     {
         return Uuid::uuid4();
+    }
+
+    public function getIncrementing()
+    {
+        return false;
     }
 }

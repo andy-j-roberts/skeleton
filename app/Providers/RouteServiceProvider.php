@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Video;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,7 +24,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('video_permalink', function ($value) {
+            return Video::with('product')->where('permalink', $value)->first();
+        });
 
         parent::boot();
     }
