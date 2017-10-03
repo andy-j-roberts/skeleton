@@ -1,18 +1,29 @@
 <template>
     <div class="col-6 mx-auto my-3">
         <div class="card">
-            <div class="bg-primary text-white">
-                <div class="card-body">
-                    <h4 class="card-title">Subscribe to {{ plan.name }}</h4>
-                    <h1>{{ plan.amount }}
-                        <small style="font-size: 16px;">/ per {{ plan.interval }}</small>
-                    </h1>
-                </div>
+            <div class="card-header">Confirm your Subscription</div>
+            <div class="card-body">
+                <p class="lead">{{ plan.description }}</p>
+                <table class="table">
+                    <thead>
+                        <th>Plan</th>
+                        <th>Billing Cycle</th>
+                        <th>Cost</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ plan.name }}</td>
+                            <td>{{ plan.interval }}</td>
+                            <td>{{ plan.amount }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-muted text-center mb-0">You can manage your subscriptions from your dashboard.</p>
             </div>
 
             <div class="card-body">
-                <h2 class="mb-3">Add Payment Details</h2>
-                <form action="/charge" method="post" id="payment-form">
+                <form action="/charge" method="post" id="payment-form" v-show="!subscribed">
+                    <h2 class="mb-3">Add Payment Details</h2>
                     <div class="form-group">
                         <label for="card-element">
                             Credit or debit card
@@ -29,6 +40,14 @@
                         <button class="btn btn-success btn-lg">Submit Payment</button>
                     </div>
                 </form>
+                <div class="text-right" v-if="subscribed">
+                    <button class="btn btn-link btn-lg" @click.prevent="cancel">Cancel</button>
+                    <button class="btn btn-success btn-lg" @click.prevent="changePlan(plan)">
+                        <i class="fa fa-spinner fa-spin" v-if="ui.busy"></i>
+                        <span v-if="!ui.busy">Change Plan</span>
+                        <span v-if="ui.busy">Changing</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -60,10 +79,13 @@
 </style>
 <script>
     export default {
-        props: [''],
+        props: ['subscribed'],
         data() {
             return {
-                plan: []
+                plan: [],
+                ui: {
+                    busy: false
+                }
             }
         },
         created() {
@@ -127,6 +149,17 @@
                 axios.post('/subscribe', {'stripeToken': token, 'stripe_id': this.plan.stripe_id})
                     .then(response => {
 
+                    })
+                    .catch(error => {
+
+                    })
+            },
+            changePlan(plan) {
+                this.ui.busy = true;
+                axios.put('/api/subscription', {stripe_id: plan.stripe_id})
+                    .then(response => {
+                        this.ui.busy = false;
+                        window.location.replace('/home');
                     })
                     .catch(error => {
 

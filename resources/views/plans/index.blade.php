@@ -8,9 +8,9 @@
                     <h3 class="text-muted">Try free for 30 days. No credit card required.</h3>
                 </div>
             </div>
-            <ul class="nav nav-pills justify-content-center mb-3">
-                <li class="nav-item nav-link active" data-toggle="tab" href="#monthly" @click.prevent="switchInterval('month')">Monthly</li>
-                <li class="nav-item nav-link" data-toggle="tab" href="#annual" @click.prevent="switchInterval('year')">Annual</li>
+            <ul class="nav nav-pills justify-content-center mb-3" v-if="ui.plan_selected == false">
+                <li class="nav-item nav-link" :class="{active:interval == 'month'}" data-toggle="tab" href="#monthly" @click.prevent="switchInterval('month')">Monthly</li>
+                <li class="nav-item nav-link" :class="{active:interval == 'year'}" data-toggle="tab" href="#annual" @click.prevent="switchInterval('year')">Annual</li>
             </ul>
             <div class="row" v-if="ui.plan_selected == false">
                 <div class="col-4" v-for="plan in filtered_plans">
@@ -28,7 +28,7 @@
             </div>
             <div class="row" v-show="ui.plan_selected">
                 <div class="col">
-                    <subscribe></subscribe>
+                    <subscribe subscribed="{{ auth()->user()->subscribed('main') }}"></subscribe>
                 </div>
             </div>
         </div>

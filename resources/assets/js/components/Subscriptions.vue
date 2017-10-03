@@ -6,12 +6,28 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex align-items-center" v-for="subscription in subscriptions">
-                    <p class="mb-0">{{ subscription.plan.name }} @ {{ subscription.plan.amount }} / per {{ subscription.plan.interval }}<br/>
-                        <small class="text-muted" v-if="subscription.ends_at">Ends at {{ subscription.ends_at }}</small></p>
-                    <a @click.prevent="cancelSubscription(subscription.plan)" class="btn text-danger ml-auto btn-link" v-if="!subscription.ends_at">Cancel</a>
-                    <a :href="resumeSubscriptionUrl(subscription.plan)" class="btn text-success ml-auto btn-link" v-if="subscription.ends_at">Resume</a>
+                    <p class="mb-0">{{ subscription.plan.name }} @ {{ subscription.plan.amount }} / per {{
+                        subscription.plan.interval }}<br/>
+                        <small class="text-muted" v-if="subscription.ends_at">Ends at {{ subscription.ends_at }}</small>
+                    </p>
+                    <button @click.prevent="cancelSubscription(subscription.plan)" class="btn text-danger ml-auto btn-link"
+                       v-if="!subscription.ends_at">
+                        <i class="fa fa-spinner fa-spin" v-if="ui.busy"></i>
+                        <span v-if="!ui.busy">Cancel</span>
+                        <span v-if="ui.busy">Cancelling</span>
+                    </button>
+                    <button @click.prevent="resumeSubscription(subscription.plan)" class="btn text-success ml-auto btn-link"
+                       v-if="subscription.ends_at">
+                        <i class="fa fa-spinner fa-spin" v-if="ui.busy"></i>
+                        <span v-if="!ui.busy">Resume</span>
+                        <span v-if="ui.busy">Resuming</span>
+                    </button>
                 </li>
             </ul>
+            <div class="card-body">
+                <a class="btn btn-block btn-outline-secondary" href="plans">Change My Plan</a>
+            </div>
+
         </div>
     </div>
 </template>
@@ -19,7 +35,10 @@
     export default {
         data() {
             return {
-                subscriptions: []
+                subscriptions: [],
+                ui: {
+                    busy: false
+                }
             }
         },
         created() {
@@ -38,20 +57,29 @@
                     })
             },
             cancelSubscription(plan) {
+                this.ui.busy = true;
                 axios.get('/subscriptions/' + plan.stripe_id)
                     .then(response => {
+                        this.ui.busy = false;
                         this.getSubscriptions();
                         bus.$emit('confirm', 'Subscription has been cancelled');
                     })
                     .catch(error => {
 
                     })
-                return "/subscriptions/" + plan.stripe_id;
-
             },
-            resumeSubscriptionUrl(plan) {
-                return "/subscriptions/" + plan.stripe_id + "/resume";
-            }
+            resumeSubscription(plan) {
+                this.ui.busy = true;
+                axios.get(`/subscriptions/${plan.stripe_id}/resume`)
+                    .then(response => {
+                        this.ui.busy = false;
+                        this.getSubscriptions();
+                        bus.$emit('confirm', 'Subscription has been resumed');
+                    })
+                    .catch(error => {
+
+                    })
+            },
         }
     }
 </script>

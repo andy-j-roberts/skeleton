@@ -3,7 +3,7 @@
         <div class="card card-border">
             <div class="card-body">
                 <h4 class="mb-3">Update Card Details</h4>
-                <p>xxxx-xxxx-xxxx-4242</p>
+                <h2 class="mb-3 text-muted"><span class="card-brand">{{ this.card.brand }}</span> <span class="card-blanks">**** **** ****</span> {{ this.card.last_four }}</h2>
                 <form action="/charge" method="post" id="payment-form">
                     <div class="form-group">
                         <label for="card-element">
@@ -26,6 +26,19 @@
 
 </template>
 <style>
+    .card-brand {
+        background: #22206A;
+        border-radius: 5px;
+        color: white;
+        font-size: 12px;
+        font-weight: bolder;
+        padding: 8px;
+        text-transform: uppercase;
+        vertical-align: middle;
+    }
+    .card-blanks {
+        vertical-align: middle;
+    }
     .StripeElement {
         background-color: white;
         padding: 8px 12px;
@@ -53,9 +66,22 @@
     export default {
         data() {
             return {
+                card: {
+                    brand: '',
+                    last_four: ''
+                }
             }
         },
         mounted() {
+            axios.get('/api/card-details')
+                .then(response => {
+                    console.log(response);
+                    this.card.brand = response.data.card_brand;
+                    this.card.last_four = response.data.card_last_four;
+                })
+                .catch(error => {
+
+                })
             var stripe = Stripe('pk_test_9BcKJTKJyjAD9cONUF4h3CEP');
             var elements = stripe.elements();
             var style = {

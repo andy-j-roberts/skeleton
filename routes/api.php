@@ -15,4 +15,6 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => ['auth:api']], function(){
    Route::get('/user','AuthenticatedUserController');
     Route::get('/subscriptions','Users\SubscriptionsController');
+    Route::put('/subscription', 'Users\UpdateSubscriptionController@update');
+    Route::get('card-details', 'Users\CardDetailsController@index');
 });

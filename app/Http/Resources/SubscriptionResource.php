@@ -18,7 +18,7 @@ class SubscriptionResource extends Resource
         return [
             'id' => $this->id,
             'stripe_id' => $this->stripe_id,
-            'ends_at' => $this->ends_at ? $this->ends_at->format('dS M Y @ h:i') : null,
+            'ends_at' => $this->ends_at ? $this->ends_at->format('jS F Y @ h:i') : null,
             'plan' => new PlanResource(Plan::whereStripeId($this->stripe_plan)->first()),
         ];
     }

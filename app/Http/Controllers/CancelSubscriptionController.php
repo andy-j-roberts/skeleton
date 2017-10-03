@@ -7,7 +7,7 @@ class CancelSubscriptionController extends Controller
 {
     public function __invoke($name)
     {
-        auth()->user()->subscription($name)->cancel();
+        auth()->user()->subscription('main')->cancel();
 
         return response()->json(['status' => 'OK'], 200);
     }

@@ -20,10 +20,11 @@
             toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
         });</script>
     <!-- Styles -->
+    <script src="https://use.fontawesome.com/c49e1f8139.js"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ url('/') }}">{{ setting('app.name') }} {{ setting('app.version') }}</a>
         @guest
@@ -72,14 +73,26 @@
         </div>
     @endif
 
-    @if(session()->has('notifications'))
-        <notification :messages="{{ session('notifications') }}"></notification>
-    @endif
+    <notification :messages="{{ session('notifications','[]') }}"></notification>
 
     <div class="my-5">
         @yield('content')
     </div>
+    <footer class="navbar footer fixed-bottom">
 
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Terms &amp; Conditions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Privacy Policy</a>
+                </li>
+            </ul>
+
+    </footer>
 </div>
 
 <!-- Scripts -->

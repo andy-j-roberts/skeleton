@@ -12,6 +12,9 @@ try {
     window.Popper = require('popper.js').default;
     require('bootstrap');
     window.Notyf = require('notyf');
+
+    window.Form = require('./form');
+    window.Errors = require('./errors');
 } catch (e) {}
 
 /**
