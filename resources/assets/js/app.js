@@ -14,7 +14,7 @@ window.Vuex = require('vuex');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+Vue.component('password-meter', require('./components/PasswordMeter.vue'));
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('announcements', require('./components/Announcements.vue'));
 Vue.component('announcement', require('./components/Announcement.vue'));

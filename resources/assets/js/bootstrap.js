@@ -15,6 +15,7 @@ try {
 
     window.Form = require('./form');
     window.Errors = require('./errors');
+    window.zxcvbn = require('zxcvbn');
 } catch (e) {}
 
 /**

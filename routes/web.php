@@ -18,7 +18,10 @@ Route::get('/under-construction', function () {
     return view('under_construction');
 });
 
+Route::get('register', 'RegisterController@index');
+Route::post('register', 'RegisterController@store');
 Auth::routes();
+
 
 
 
