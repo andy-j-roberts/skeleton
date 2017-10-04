@@ -9188,6 +9188,15 @@ a.text-dark:hover {
   visibility: hidden !important;
 }
 
+.full-bg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-size: cover;
+  min-height: 100vh;
+  height: auto;
+}
+
 [v-cloak] {
   display: none;
 }

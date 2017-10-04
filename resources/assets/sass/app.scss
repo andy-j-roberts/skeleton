@@ -9,6 +9,14 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~notyf/dist/notyf.min.css";
 
+.full-bg {
+  display: flex;
+  background-size: cover;
+  min-height: 100vh;
+  height: auto;
+}
+
+
 [v-cloak] {display: none}
 
 .page-header {

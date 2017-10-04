@@ -7,6 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- GOOGLE ANALYTICS -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107534085-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -17,6 +18,7 @@
             'user_id': '{!! auth()->id() !!}'
         });
     </script>
+    <!-- END -->
     <script>
         window.App = {
             user: {!! auth()->user() ? 'true' : 'null' !!}
@@ -24,9 +26,6 @@
     </script>
     <title>{{ setting('app.name') }} {{ setting('app.version') }}</title>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107534085-1"></script>
-
     <script>tinymce.init({
             selector: '.editor', theme: 'modern',
             plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
@@ -105,7 +104,7 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Terms &amp; Conditions</a>
+                <a class="nav-link" href="#">Terms &amp;amp; Conditions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">Privacy Policy</a>
