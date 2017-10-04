@@ -7681,7 +7681,8 @@ a.bg-dark:hover {
 }
 
 .pt-5,
-.py-5 {
+.py-5,
+.page-header {
   padding-top: 3rem !important;
 }
 
@@ -7691,7 +7692,8 @@ a.bg-dark:hover {
 }
 
 .pb-5,
-.py-5 {
+.py-5,
+.page-header {
   padding-bottom: 3rem !important;
 }
 
@@ -9188,6 +9190,15 @@ a.text-dark:hover {
 
 [v-cloak] {
   display: none;
+}
+
+.page-header {
+  background: white;
+}
+
+body,
+html {
+  background: rgba(244, 244, 244, 0.3);
 }
 
 .footer {

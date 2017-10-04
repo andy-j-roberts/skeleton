@@ -1,12 +1,13 @@
 @extends('layouts.app')
-
+@section('page-title')
+    <div class="row">
+        <div class="col">
+            <h1>Manage Settings</h1>
+        </div>
+    </div>
+@stop
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1 class="mb-5">Manage Settings</h1>
-            </div>
-        </div>
         <div class="row">
             <div class="col-3">
                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">

@@ -1,12 +1,13 @@
 @extends('layouts.app')
-
+@section('page-title')
+    <div class="row">
+        <div class="col">
+            <h1>Manage Users</h1>
+        </div>
+    </div>
+@stop
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>Manage Users</h1>
-            </div>
-        </div>
         <div class="d-flex mt-5">
             <a href="/admin/users/create" class="btn btn-lg btn-primary">Create User</a>
             <form method="GET" role="search" class="w-100 ml-3">

@@ -1,21 +1,20 @@
 @extends('layouts.app')
 
+@section('page-title')
+    <div class="row">
+        <div class="col mr-auto">
+            <h1>Manage Plans</h1>
+        </div>
+        <div class="text-right">
+            <a href="/admin/stripe/sync-plans" class="btn btn-link text-secondary">Sync Plans</a>
+            <a href="/admin/plans/create" class="btn btn-success">Create Plan</a>
+        </div>
+    </div>
+@stop
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col mr-auto">
-                <h1 class="mb-5">Manage Plans</h1>
-            </div>
-            <div class="text-right">
-                <a href="/admin/stripe/sync-plans" class="btn btn-link text-secondary">Sync Plans</a>
-                <a href="/admin/plans/create" class="btn btn-success">Create Plan</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
 
-            </div>
-        </div>
+
         <div class="row">
             <div class="col">
                 <ul class="nav nav-pills justify-content-center mb-3">

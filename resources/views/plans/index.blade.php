@@ -28,7 +28,7 @@
             </div>
             <div class="row" v-show="ui.plan_selected">
                 <div class="col">
-                    <subscribe subscribed="{{ auth()->user()->subscribed('main') }}"></subscribe>
+                    <subscribe subscribed="{{ auth()->user() ? auth()->user()->subscribed('main') : false }}"></subscribe>
                 </div>
             </div>
         </div>

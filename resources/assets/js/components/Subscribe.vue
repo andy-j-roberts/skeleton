@@ -146,9 +146,11 @@
                 bus.$emit('cancel-plan');
             },
             subscribe(token) {
+                this.ui.busy = true;
                 axios.post('/subscribe', {'stripeToken': token, 'stripe_id': this.plan.stripe_id})
                     .then(response => {
-
+                        this.ui.busy = false;
+                        window.location.replace('/home');
                     })
                     .catch(error => {
 

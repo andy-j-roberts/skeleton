@@ -1,13 +1,11 @@
 <template>
     <div class="mb-5">
-        <input type="password" v-model="password">
         <label>Password Strength</label>
-        <p class="mb-0"><small>{{ indicators[passwordStrength] }}</small></p>
+        <p class="mb-0 password-strength" :data-score="passwordStrength"><small>{{ indicators[passwordStrength] }}</small></p>
         <div class="progress">
             <div class="progress-bar" role="progressbar" :data-score="passwordStrength" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
-
 </template>
 <style>
     .progress {
@@ -16,6 +14,12 @@
     .progress-bar {
         transition: all 0.3s linear;
     }
+    .password-strength { transition: 0.3s all linear; }
+    .password-strength[data-score='0']{ color:#FF0074; }
+    .password-strength[data-score='1']{ color:orangered; }
+    .password-strength[data-score='2']{ color:orange; }
+    .password-strength[data-score='3']{ color:yellowgreen; }
+    .password-strength[data-score='4']{ color:green; }
     .progress-bar[data-score='0'] {
         background: #FF0074;
         width: 20%;
@@ -39,7 +43,6 @@
     </style>
 <script>
     export default {
-        props: [''],
         data() {
             return {
                 password: '',
@@ -52,18 +55,15 @@
                 }
             }
         },
-        watch: {
-            password: function (val) {
-                this.password = val
-            },
+        created() {
+            bus.$on('passwordEntered', (value) => {
+                this.password = value;
+            })
         },
         computed: {
-            passwordStrength()
-            {
+            passwordStrength() {
                 return this.password ? zxcvbn(this.password).score : null
             }
-        },
-        created() {
         },
         mounted() {
         },

@@ -34,13 +34,18 @@ class User extends Authenticatable
 
     public function getAvatarAttribute()
     {
-        $avatarEmail = md5( strtolower(trim($this->email)));
+        $avatarEmail = md5(strtolower(trim($this->email)));
 
         return "https://www.gravatar.com/avatar/{$avatarEmail}?size=80&default=retro";
     }
 
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'user_products','user_id','product_id')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'user_products', 'user_id', 'product_id')->withTimestamps();
     }
 }

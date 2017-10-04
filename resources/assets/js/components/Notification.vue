@@ -5,7 +5,7 @@
         top: 40px;
         left: 40px;
     }
-    </style>
+</style>
 <script>
     export default {
         props: ['messages'],
@@ -15,9 +15,9 @@
             }
         },
         created() {
-          bus.$on('confirm', message => {
-              this.notyf.confirm(message);
-          });
+            bus.$on('confirm', message => {
+                this.notyf.confirm(message);
+            });
             bus.$on('alert', message => {
                 this.notyf.alert(message);
             });

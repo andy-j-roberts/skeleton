@@ -11,6 +11,13 @@
 
 [v-cloak] {display: none}
 
+.page-header {
+  @extend .py-5;
+  background: white;
+}
+body, html {
+  background: rgba(244, 244, 244, 0.3);
+}
 .footer {
   width: 100%;
   background-color: #f5f5f5;

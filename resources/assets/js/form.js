@@ -134,5 +134,6 @@ module.exports = class Form {
      */
     onFail(errors) {
         this.errors.record(errors);
+        this.busy = false;
     }
 }

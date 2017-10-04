@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('register', 'RegisterUsersController');
+
 Route::group(['middleware' => ['auth:api']], function(){
    Route::get('/user','AuthenticatedUserController');
     Route::get('/subscriptions','Users\SubscriptionsController');

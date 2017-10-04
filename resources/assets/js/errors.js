@@ -4,9 +4,12 @@ module.exports = class Errors {
      */
     constructor() {
         this.errors = {};
+        this.message = '';
     }
 
-
+    message() {
+        return this.message;
+    }
     /**
      * Determine if an errors exists for the given field.
      *
@@ -43,7 +46,8 @@ module.exports = class Errors {
      * @param {object} errors
      */
     record(errors) {
-        this.errors = errors;
+        this.errors = errors.errors;
+        this.message = errors.message;
     }
 
 

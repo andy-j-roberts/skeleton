@@ -10,14 +10,16 @@
                         subscription.plan.interval }}<br/>
                         <small class="text-muted" v-if="subscription.ends_at">Ends at {{ subscription.ends_at }}</small>
                     </p>
-                    <button @click.prevent="cancelSubscription(subscription.plan)" class="btn text-danger ml-auto btn-link"
-                       v-if="!subscription.ends_at">
+                    <button @click.prevent="cancelSubscription(subscription.plan)"
+                            class="btn text-danger ml-auto btn-link"
+                            v-if="!subscription.ends_at">
                         <i class="fa fa-spinner fa-spin" v-if="ui.busy"></i>
                         <span v-if="!ui.busy">Cancel</span>
                         <span v-if="ui.busy">Cancelling</span>
                     </button>
-                    <button @click.prevent="resumeSubscription(subscription.plan)" class="btn text-success ml-auto btn-link"
-                       v-if="subscription.ends_at">
+                    <button @click.prevent="resumeSubscription(subscription.plan)"
+                            class="btn text-success ml-auto btn-link"
+                            v-if="subscription.ends_at">
                         <i class="fa fa-spinner fa-spin" v-if="ui.busy"></i>
                         <span v-if="!ui.busy">Resume</span>
                         <span v-if="ui.busy">Resuming</span>
@@ -25,7 +27,9 @@
                 </li>
             </ul>
             <div class="card-body">
-                <a class="btn btn-block btn-outline-secondary" href="plans">Change My Plan</a>
+                <a class="btn btn-block btn-outline-secondary btn-lg" href="plans"><i class="fa fa-refresh"
+                                                                                      aria-hidden="true"></i>
+                    Change My Plan</a>
             </div>
 
         </div>

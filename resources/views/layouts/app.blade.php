@@ -59,6 +59,13 @@
                 </div>
                 @endguest
     </nav>
+    @if (View::hasSection('page-title'))
+    <div class="page-header">
+        <div class="container">
+            @yield('page-title')
+        </div>
+    </div>
+    @endif
 
     @if(session()->has('masquerade.is_masquerading') )
         <div class="alert alert-info">

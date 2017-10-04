@@ -2,9 +2,12 @@
     <div class="col my-3">
         <div class="card card-border">
             <div class="card-body">
-                <h4 class="mb-3">Update Card Details</h4>
-                <h2 class="mb-3 text-muted"><span class="card-brand">{{ this.card.brand }}</span> <span class="card-blanks">**** **** ****</span> {{ this.card.last_four }}</h2>
-                <form action="/charge" method="post" id="payment-form">
+                <h4 class="mb-3">Card Details</h4>
+                <h2 class="mb-3 text-muted">
+                    <span class="card-brand">{{ this.card.brand }}</span> <span class="card-blanks">**** **** ****</span> {{ this.card.last_four }}
+                    <button @click.prevent="showUpdateForm" class="btn btn-link pull-right" v-if="!ui.update">Update</button>
+                </h2>
+                <form action="/charge" method="post" id="payment-form" v-show="ui.update">
                     <div class="form-group">
                         <label for="card-element">
                             Credit or debit card
@@ -12,8 +15,6 @@
                         <div id="card-element">
                             <!-- a Stripe Element will be inserted here. -->
                         </div>
-
-                        <!-- Used to display form errors -->
                         <div id="card-errors" class="text-muted" role="alert"></div>
                     </div>
                     <div class="text-right">
@@ -69,6 +70,9 @@
                 card: {
                     brand: '',
                     last_four: ''
+                },
+                ui:{
+                    update: false
                 }
             }
         },
@@ -128,6 +132,9 @@
             });
         },
         methods: {
+            showUpdateForm() {
+                this.ui.update = true;
+            },
             update(token) {
                 axios.put('/card-details', {'stripeToken': token})
                     .then(response => {
