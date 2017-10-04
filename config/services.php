@@ -35,4 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'tid' => 'UA-107534085-1'
+    ],
+
 ];

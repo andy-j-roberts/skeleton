@@ -23,7 +23,11 @@ Route::get('register', 'RegisterController@index');
 
 
 
+Route::get('ga', function(){
+   $ga = new \App\Services\GoogleAnalytics();
+   $reports = $ga->forViewId(161783159)->getReport();
 
+});
 
 Route::group(['middleware' => 'valid-subscription'], function(){
     Route::get('/home', 'HomeController@index')->name('home');

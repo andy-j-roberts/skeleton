@@ -7,6 +7,16 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107534085-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments)};
+        gtag('js', new Date());
+
+        gtag('config', 'UA-107534085-1', {
+            'user_id': '{!! auth()->id() !!}'
+        });
+    </script>
     <script>
         window.App = {
             user: {!! auth()->user() ? 'true' : 'null' !!}
@@ -14,6 +24,9 @@
     </script>
     <title>{{ setting('app.name') }} {{ setting('app.version') }}</title>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107534085-1"></script>
+
     <script>tinymce.init({
             selector: '.editor', theme: 'modern',
             plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
@@ -60,11 +73,11 @@
                 @endguest
     </nav>
     @if (View::hasSection('page-title'))
-    <div class="page-header">
-        <div class="container">
-            @yield('page-title')
+        <div class="page-header">
+            <div class="container">
+                @yield('page-title')
+            </div>
         </div>
-    </div>
     @endif
 
     @if(session()->has('masquerade.is_masquerading') )
@@ -87,17 +100,17 @@
     </div>
     <footer class="navbar footer fixed-bottom">
 
-            <ul class="nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Terms &amp; Conditions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Privacy Policy</a>
-                </li>
-            </ul>
+        <ul class="nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Terms &amp; Conditions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Privacy Policy</a>
+            </li>
+        </ul>
 
     </footer>
 </div>
@@ -105,5 +118,6 @@
 <!-- Scripts -->
 <script src="https://js.stripe.com/v3/"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>

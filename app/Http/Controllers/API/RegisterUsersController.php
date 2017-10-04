@@ -6,6 +6,7 @@ use App\Events\UserHasRegistered;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\WelcomeEmail;
+use Facades\App\Services\GoogleAnalytics;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,7 @@ class RegisterUsersController extends Controller
         $user->notify(new WelcomeEmail($user));
         Auth::guard('web')->login($user, true);
         event(new UserHasRegistered($user));
+        GoogleAnalytics::trackEvent('users', 'new_user', $user->name);
 
         return response()->json($user);
     }

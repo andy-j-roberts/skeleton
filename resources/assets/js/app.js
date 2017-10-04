@@ -15,7 +15,7 @@ window.Vuex = require('vuex');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('register-form', require('./forms/RegisterForm.vue'));
-
+Vue.component('user-form', require('./forms/UserForm.vue'));
 
 Vue.component('password-meter', require('./components/PasswordMeter.vue'));
 
