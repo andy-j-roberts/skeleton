@@ -14,9 +14,12 @@ use Illuminate\Http\Request;
 */
 Route::post('register', 'RegisterUsersController');
 
-Route::group(['middleware' => ['auth:api']], function(){
-   Route::get('/user','AuthenticatedUserController');
-    Route::get('/subscriptions','Users\SubscriptionsController');
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('/user', 'AuthenticatedUserController');
+    Route::resource('users', 'Users\UsersController', ['only' => ['store', 'update', 'destroy']]);
+    Route::resource('users/{user}/roles', 'Users\UserRolesController', ['only' => ['update', 'destroy']]);
+
+    Route::get('/subscriptions', 'Users\SubscriptionsController');
     Route::put('/subscription', 'Users\UpdateSubscriptionController@update');
     Route::get('card-details', 'Users\CardDetailsController@index');
     Route::post('purchase-product/{product}', 'PurchaseProductsController');

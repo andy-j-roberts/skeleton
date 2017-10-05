@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\ElasticsearchApi;
+use App\Services\ElasticsearchQuery;
+use Elasticsearch\ClientBuilder;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::if('admin', function () {
+        Blade::if ('admin', function () {
             return auth()->user()->hasRole('Admin');
         });
         Resource::withoutWrapping();
@@ -34,6 +37,18 @@ class AppServiceProvider extends ServiceProvider
         Passport::ignoreMigrations();
         $this->app->singleton('flash', function () {
             return $this->app->make('App\Libraries\FlashNotifier');
+        });
+
+        $this->app->singleton(ElasticsearchApi::class, function ($app) {
+            $client = ClientBuilder::create()
+                                   ->setHosts(config('services.elasticsearch.host'))
+                                   ->build();
+
+            return new ElasticsearchApi($client);
+        });
+
+        $this->app->bind(ElasticsearchQuery::class, function ($app) {
+            return new ElasticsearchQuery(app(ElasticsearchApi::class));
         });
     }
 }

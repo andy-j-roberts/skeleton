@@ -20,9 +20,6 @@ Route::get('/under-construction', function () {
 Auth::routes();
 Route::get('register', 'RegisterController@index');
 
-
-
-
 Route::get('ga', function(){
    $ga = new \App\Services\GoogleAnalytics();
    $reports = $ga->forViewId(161783159)->getReport();

@@ -15,9 +15,9 @@
         },
         methods: {
             submit() {
-                this.form.post(`/users/${this.user.id}`)
+                this.form.put(`/api/users/${this.user.id}`)
                     .then(response => {
-
+                        bus.$emit('confirm', response.message);
                     })
                     .catch(error => {
                         bus.$emit('alert', this.form.errors.message);

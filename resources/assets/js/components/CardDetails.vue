@@ -1,12 +1,12 @@
 <template>
     <div class="col my-3">
-        <div class="card card-border">
+        <div class="card">
             <div class="card-body">
-                <h4 class="mb-3">Card Details</h4>
-                <h2 class="mb-3 text-muted">
+                <h4 class="mb-3 card-title">Card Details</h4>
+                <h4 class="mb-3 text-muted">
                     <span class="card-brand">{{ this.card.brand }}</span> <span class="card-blanks">**** **** ****</span> {{ this.card.last_four }}
                     <button @click.prevent="showUpdateForm" class="btn btn-link pull-right" v-if="!ui.update">Update</button>
-                </h2>
+                </h4>
                 <form action="/charge" method="post" id="payment-form" v-show="ui.update">
                     <div class="form-group">
                         <label for="card-element">

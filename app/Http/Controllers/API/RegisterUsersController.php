@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Events\UserHasRegistered;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Notifications\WelcomeEmail;
 use Facades\App\Services\GoogleAnalytics;
@@ -25,6 +26,6 @@ class RegisterUsersController extends Controller
         event(new UserHasRegistered($user));
         GoogleAnalytics::trackEvent('users', 'new_user', $user->name);
 
-        return response()->json($user);
+        return response()->json(new UserResource($user));
     }
 }

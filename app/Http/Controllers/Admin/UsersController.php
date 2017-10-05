@@ -18,7 +18,12 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        if (request()->filled('q')) {
+            $users = User::search(request('q'))
+                         ->paginate(10);
+        } else {
+            $users = User::paginate(10);
+        }
         request()->flash();
 
         return view('admin.users.index', ['users' => $users]);
@@ -37,15 +42,16 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $password = str_random(16);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+        $user     = User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
             'password' => bcrypt($password),
         ]);
         $user->notify(new UserAccountDetails($password));
@@ -58,7 +64,8 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -77,9 +84,9 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        
+
         return view('admin.users.edit', [
-            'user' => $user,
+            'user'  => $user,
             'roles' => $roles,
         ]);
     }
@@ -95,8 +102,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->validate($request, ['name' => 'required','email' => 'required|email']);
-        $user->update($request->only(['name','email']));
+        $this->validate($request, ['name' => 'required', 'email' => 'required|email']);
+        $user->update($request->only(['name', 'email']));
 
         return redirect('/admin/users');
     }

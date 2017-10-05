@@ -1,6 +1,6 @@
 <template>
     <div class="my-5 container">
-        <div class="card card-border">
+        <div class="card">
             <div class="card-body">
                 <h3 class="card-title">Subscriptions</h3>
             </div>
@@ -26,8 +26,8 @@
                     </button>
                 </li>
             </ul>
-            <div class="card-body">
-                <a class="btn btn-block btn-outline-secondary btn-lg" href="plans"><i class="fa fa-refresh"
+            <div class="card-footer text-right">
+                <a class="btn btn-primary" href="plans"><i class="fa fa-refresh"
                                                                                       aria-hidden="true"></i>
                     Change My Plan</a>
             </div>

@@ -39,4 +39,8 @@ return [
         'tid' => 'UA-107534085-1'
     ],
 
+    'elasticsearch' => [
+        'host' => 'localhost:9200',
+    ]
+
 ];

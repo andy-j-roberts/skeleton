@@ -21,7 +21,7 @@
             <div class="col-8">
                 <user-form inline-template :user="{{ $user }}">
                     <form action="/admin/users/{{ $user->id }}" method="POST">
-                        <div class="card card-border">
+                        <div class="card">
                             <div class="card-body">
                                 <h3 class="card-title">User Details</h3>
                                 <hr class="mb-5"/>
@@ -81,7 +81,7 @@
                                 <a href="#" class="btn text-danger">Remove</a>
                             </li>
                         @empty
-                            <li class="list-group-item text-center text-info">
+                            <li class="list-group-item text-center text-muted">
                                 No roles have been assigned
                             </li>
                         @endforelse

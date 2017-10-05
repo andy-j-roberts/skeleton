@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
@@ -21,10 +22,12 @@ class User extends Authenticatable
     use HasApiTokens;
     use Billable;
     use CanAccessContent;
+    use Searchable;
 
     protected $guarded = [];
     protected $dates = ['last_login'];
     protected $hidden = [
+        'stripe_id',
         'password',
         'remember_token',
     ];
@@ -47,5 +50,15 @@ class User extends Authenticatable
     public function products()
     {
         return $this->belongsToMany(Product::class, 'user_products', 'user_id', 'product_id')->withTimestamps();
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'roles' => $this->roles,
+        ];
     }
 }

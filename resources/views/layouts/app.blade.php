@@ -49,11 +49,11 @@
                 </ul>
                 @else
                     <div class="btn-group">
-                        <button class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+                        <a class="dropdown-toggle btn btn-link" data-toggle="dropdown" role="button"
                                 aria-expanded="false">
                             <img src="{{ auth()->user()->avatar }}" alt="avatar" class="rounded-circle"
                                  height="24px"> {{ Auth::user()->name }} <span class="caret"></span>
-                        </button>
+                        </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             @admin
                             <a class="dropdown-item" href="/admin/users">Users</a>
