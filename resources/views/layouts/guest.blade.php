@@ -40,50 +40,6 @@
 </head>
 <body>
 <div id="app" v-cloak>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}"><i class="fa fa-cubes" aria-hidden="true"></i> {{ setting('app.name') }} {{ setting('app.version') }}</a>
-            @guest
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                </ul>
-                @else
-                    <div class="btn-group">
-                        <button class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
-                                aria-expanded="false">
-                            <img src="{{ auth()->user()->avatar }}" alt="avatar" class="rounded-circle"
-                                 height="24px"> {{ Auth::user()->name }} <span class="caret"></span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            @admin
-                            <a class="dropdown-item" href="/admin/users">Users</a>
-                            <a class="dropdown-item" href="/admin/roles">Roles</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/admin/pages">Pages</a>
-                            <a class="dropdown-item" href="/admin/plans">Plans</a>
-                            <a class="dropdown-item" href="/admin/settings">Settings</a>
-                            <div class="dropdown-divider"></div>
-                            @endadmin
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">
-                                Logout
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </a>
-                        </div>
-                    </div>
-                    @endguest
-        </div>
-    </nav>
-    @if (View::hasSection('page-title'))
-        <div class="page-header">
-            <div class="container">
-                @yield('page-title')
-            </div>
-        </div>
-    @endif
 
     @if(session()->has('masquerade.is_masquerading') )
         <div class="alert alert-info">
@@ -100,7 +56,7 @@
 
     <notification :messages="{{ session('notifications','[]') }}"></notification>
 
-    <div class="my-5">
+    <div class="">
         @yield('content')
     </div>
 </div>

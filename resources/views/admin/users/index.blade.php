@@ -16,13 +16,12 @@
         </div>
         <div class="row mt-5">
             <div class="col">
-                <div class="list-group">
+                <div class="list-group list">
                     @foreach($users as $user)
                         <div class="list-group-item d-flex">
                             <div class="mr-auto">
                                 <h4>{{ $user->name }}</h4>
                                 <h5 class="text-muted">{{ $user->email }}</h5>
-                                <small class="text-muted">Member since {{ $user->created_at->toFormattedDateString() }}</small>
                             </div>
                             <div class="ml-auto mr-0 row align-items-center">
                                 <div class="dropdown">

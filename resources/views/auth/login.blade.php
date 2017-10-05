@@ -1,26 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid loginContainer">
         <div class="row">
-            <div class="col-6 full-bg">
-                <div class="align-self-center">
-                    <h1 class="text-center">Login</h1>
-                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-            <div class="col-6 full-bg"
-                 style="background-image: url(https://images.unsplash.com/photo-1426604966848-d7adac402bff?dpr=1&auto=compress,format&fit=crop&w=1350&h=&q=80&cs=tinysrgb&crop=);">
-                <div class="align-self-center col-6 mx-auto">
-                    <form method="POST" action="{{ route('login') }}" class="align-self-center">
-                        <div class="card">
-                            <div class="card-body">
-                                {{ csrf_field() }}
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6 mx-auto">
+                        <h4 class="pt-5"><i class="fa fa-cubes"
+                               aria-hidden="true"></i> {{ setting('app.name') }} {{ setting('app.version') }}</h4>
+                    </div>
 
+                </div>
+                <div class="full-bg">
+                    <div class="align-self-center col-12">
+                        <div class="col-6 mx-auto">
+                            <h1>Login</h1>
+                            <form method="POST" action="{{ route('login') }}" class="align-self-center">
+                                {{ csrf_field() }}
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label for="email" class="form-control-label">E-Mail Address</label>
-                                    <input id="email" type="email" class="form-control" name="email"
-                                           value="{{ old('email') }}" required autofocus>
+                                    <input id="email" type="email" class="form-control form-control-lg" name="email"
+                                           value="{{ old('email') }}" required autofocus placeholder="Email Address">
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -29,8 +28,8 @@
                                 </div>
 
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="form-control-label">Password</label>
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="password" type="password" class="form-control form-control-lg" name="password" required
+                                           placeholder="Password">
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -48,18 +47,26 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">
-                                        Login
-                                    </button>
-
+                                <div class="form-group text-right">
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         Forgot Your Password?
                                     </a>
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        Login
+                                    </button>
                                 </div>
-                            </div>
+
+                            </form>
                         </div>
-                    </form>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6 full-bg"
+                 style="background-image: url(https://images.unsplash.com/photo-1469386220931-a05a3a71cbb5?dpr=1&auto=compress,format&fit=crop&w=1951&h=&q=80&cs=tinysrgb&crop=);">
+                <div class="align-self-center col-6 mx-auto">
+
                 </div>
 
             </div>

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('verified')->default(false);
             $table->string('verification_token')->nullable();
-            $table->datetime('last_login');
+            $table->datetime('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

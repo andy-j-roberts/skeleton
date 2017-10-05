@@ -1,10 +1,5 @@
 <template></template>
 <style>
-    .notyf {
-        z-index: 1040;
-        top: 40px;
-        left: 40px;
-    }
 </style>
 <script>
     export default {
