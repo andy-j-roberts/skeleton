@@ -40,7 +40,7 @@ return [
     ],
 
     'elasticsearch' => [
-        'host' => 'localhost:9200',
+        'host' => 'localhost:32769',
     ]
 
 ];

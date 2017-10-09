@@ -38,17 +38,5 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('flash', function () {
             return $this->app->make('App\Libraries\FlashNotifier');
         });
-
-        $this->app->singleton(ElasticsearchApi::class, function ($app) {
-            $client = ClientBuilder::create()
-                                   ->setHosts(config('services.elasticsearch.host'))
-                                   ->build();
-
-            return new ElasticsearchApi($client);
-        });
-
-        $this->app->bind(ElasticsearchQuery::class, function ($app) {
-            return new ElasticsearchQuery(app(ElasticsearchApi::class));
-        });
     }
 }
