@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('gallery', function () {
+    $gallery = \App\Gallery::first();
+
+    return view('galleries.show', ['gallery' => $gallery]);
+});
 Route::demoAccess('/demo');
 Route::get('/', function () {
     return view('welcome');
@@ -20,25 +25,27 @@ Route::get('/under-construction', function () {
 Auth::routes();
 Route::get('register', 'RegisterController@index');
 
-Route::get('ga', function(){
-   $ga = new \App\Services\GoogleAnalytics();
-   $reports = $ga->forViewId(161783159)->getReport();
+Route::get('ga', function () {
+    $ga      = new \App\Services\GoogleAnalytics();
+    $reports = $ga->forViewId(161783159)->getReport();
 
 });
 
-Route::group(['middleware' => 'valid-subscription'], function(){
+Route::get('project-spaces/{project_space_permalink}', 'ProjectSpacesController@show');
+
+Route::group(['middleware' => 'valid-subscription'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
-Route::group(['middleware' => ['demo']], function(){
+Route::group(['middleware' => ['demo']], function () {
 
 });
 
 Route::resource('plans', 'PlansController');
-Route::post('subscribe','SubscribeToPlanController');
-Route::get('subscriptions/{name}','CancelSubscriptionController');
-Route::get('subscriptions/{name}/resume','ResumeSubscriptionController');
+Route::post('subscribe', 'SubscribeToPlanController');
+Route::get('subscriptions/{name}', 'CancelSubscriptionController');
+Route::get('subscriptions/{name}/resume', 'ResumeSubscriptionController');
 
-Route::group(['middleware' => ['auth']], function(){
+Route::group(['middleware' => ['auth']], function () {
     Route::get('videos', 'VideosController@index');
     Route::get('videos/{video_permalink}', 'VideosController@show');
 });
@@ -49,3 +56,10 @@ Route::get('email-verification/check/{token}', 'Auth\VerificationController@veri
 Route::get('email-verification/error', 'Auth\VerificationController@getVerificationError');
 Route::get('verify-account', 'Auth\VerificationController@getVerificationAccountPage');
 Route::get('verify-account/send', 'Auth\VerificationController@resendVerificationEmail');
+
+
+Route::post('gallery', function () {
+    $gallery = \App\Gallery::first();
+
+    return $gallery->addMediaFromRequest('file');
+});

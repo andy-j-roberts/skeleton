@@ -2,13 +2,14 @@
 
 namespace App;
 
+use App\Models\User;
 use App\Traits\Encrytable;
 use App\Traits\GeneratesUuidIdentifier;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Project extends Model
+class ProjectSpace extends Model
 {
     use GeneratesUuidIdentifier;
     use HasSlug;
@@ -23,15 +24,22 @@ class Project extends Model
                           ->saveSlugsTo('permalink');
     }
 
-
-    public function clients()
+    public function users()
     {
-        return $this->belongsToMany(Client::class);
+        return $this->belongsToMany(User::class);
     }
 
-    public function product()
+    public function zones()
     {
-        return $this->morphMany(Product::class, 'productable');
+        return $this->hasMany(ProjectSpaceZone::class);
     }
 
+    public function addZone($model)
+    {
+        $zone = new ProjectSpaceZone();
+        $zone->project_space()->associate($this);
+        $model->zone()->save($zone);
+
+        return $this;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\ProjectSpace;
 use App\Video;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -26,6 +27,10 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::bind('video_permalink', function ($value) {
             return Video::with('product')->where('permalink', $value)->first();
+        });
+
+        Route::bind('project_space_permalink', function($value) {
+            return ProjectSpace::with(['users','zones'])->where('permalink', $value)->first();
         });
 
         parent::boot();

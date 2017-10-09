@@ -7,9 +7,11 @@
     "require": {
         "php": ">=7.0.0",
         "adbario/php-dot-notation": "^2.0",
+        "elasticsearch/elasticsearch": "5.2.*",
         "fideloper/proxy": "~3.3",
         "google/apiclient": "^2.0",
         "guzzlehttp/guzzle": "~6.0",
+        "intervention/image": "^2.4",
         "laravel/cashier": "~7.0",
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
@@ -18,8 +20,7 @@
         "pusher/pusher-php-server": "~3.0",
         "spatie/laravel-demo-mode": "^2.1",
         "spatie/laravel-sluggable": "^2.1",
-        "tamayo/laravel-scout-elastic": "^3.0",
-        "elasticsearch/elasticsearch": "5.2.*"
+        "tamayo/laravel-scout-elastic": "^3.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

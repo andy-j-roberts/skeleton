@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ProjectsSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class ProjectsSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\ProjectSpace::class, 20)->create();
+        factory(\App\Models\User::class, 20)->create(['password' => 'password']);
     }
 }

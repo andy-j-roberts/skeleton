@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Contracts\Purchasable;
 use App\Traits\GeneratesUuidIdentifier;
+use App\Traits\Zoneable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -12,6 +13,7 @@ class Video extends Model implements Purchasable
 {
     use GeneratesUuidIdentifier;
     use HasSlug;
+    use Zoneable;
 
     protected $guarded = [];
     protected $appends = ['path'];

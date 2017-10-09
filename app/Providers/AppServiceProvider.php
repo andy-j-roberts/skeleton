@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::if ('admin', function () {
-            return auth()->user()->hasRole('Admin');
+            return auth()->user()->hasRole('admin');
         });
         Resource::withoutWrapping();
         Cashier::useCurrency('gbp', '£');

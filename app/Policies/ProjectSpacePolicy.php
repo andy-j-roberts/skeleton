@@ -3,23 +3,16 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Project;
+use App\ProjectSpace;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProjectPolicy
+class ProjectSpacePolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view the project.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\odel=App\Project  $project
-     * @return mixed
-     */
-    public function view(User $user, Project $project)
+    public function view(User $user, ProjectSpace $project_space)
     {
-        return in_array($user, $project->users);
+        return $project_space->users->contains($user);
     }
 
     /**
@@ -30,7 +23,7 @@ class ProjectPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -40,7 +33,7 @@ class ProjectPolicy
      * @param  \App\odel=App\Project  $project
      * @return mixed
      */
-    public function update(User $user, Project $project)
+    public function update(User $user, ProjectSpace $project_space)
     {
         //
     }
@@ -52,7 +45,7 @@ class ProjectPolicy
      * @param  \App\odel=App\Project  $project
      * @return mixed
      */
-    public function delete(User $user, Project $project)
+    public function delete(User $user, ProjectSpace $project)
     {
         //
     }
