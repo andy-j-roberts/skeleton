@@ -33,4 +33,9 @@ class Media extends Model
     {
         return Storage::url('uploads/' . $this->file_name);
     }
+
+    public function getCustomProperty($property)
+    {
+        return $this->custom_properties[$property] ?? null;
+    }
 }
