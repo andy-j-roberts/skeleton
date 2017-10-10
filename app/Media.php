@@ -10,8 +10,8 @@ class Media extends Model
     protected $table = 'media';
     protected $guarded = [];
     protected $casts = [
-        'manipulations'     => 'array',
-        'custom_properties' => 'array'
+        'presets'     => 'array',
+        'metadata' => 'array'
     ];
 
     public function model()
@@ -21,7 +21,7 @@ class Media extends Model
 
     public function getPresetPath($preset)
     {
-        if ( ! in_array($preset, $this->manipulations)) {
+        if ( ! in_array($preset, $this->presets)) {
 
             return $this->getPath();
         }
@@ -34,8 +34,8 @@ class Media extends Model
         return Storage::url('uploads/' . $this->file_name);
     }
 
-    public function getCustomProperty($property)
+    public function getMetadata($key)
     {
-        return $this->custom_properties[$property] ?? null;
+        return $this->metadata[$key] ?? null;
     }
 }
